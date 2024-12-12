@@ -1,0 +1,5 @@
+(executable
+ (public_name euler917)
+ (name main)
+ (modules main)
+ (libraries euler917 core))

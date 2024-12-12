@@ -1,0 +1,4 @@
+(library
+ (name euler917)
+ (modules sequence)
+ (libraries core))

@@ -1,0 +1,8 @@
+lib: [
+  "_build/install/default/lib/euler917/META"
+  "_build/install/default/lib/euler917/dune-package"
+  "_build/install/default/lib/euler917/opam"
+]
+bin: [
+  "_build/install/default/bin/euler917"
+]

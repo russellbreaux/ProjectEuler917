@@ -1,0 +1,16 @@
+# dune exec euler917 60000
+# OCAMLPARAM: unset
+# Shared cache: disabled
+# Shared cache location: /Users/russellbreaux/.cache/dune/db
+# Workspace root: /Users/russellbreaux/Coding/Ocaml/euler917
+# Auto-detected concurrency: 4
+# Dune context:
+#  { name = "default"
+#  ; kind = "default"
+#  ; profile = Dev
+#  ; merlin = true
+#  ; fdo_target_exe = None
+#  ; build_dir = In_build_dir "default"
+#  ; instrument_with = []
+#  }
+$ /Users/russellbreaux/.opam/default/bin/ocamlc.opt -config > /var/folders/x8/xkwqgk3s2lqgcrw2931b334w0000gn/T/dune_9322f5_output
