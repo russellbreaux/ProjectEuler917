@@ -1,9 +1,6 @@
-(* Function library for Euler problem number 917 *)
+(* Function library for Project Euler problem number 917 *)
 
-(* A bandaid since the damn function doesn't work in main. Should not be needed. *)
-(*let mapi_inplace = Array.mapi_inplace  *)
-
-(* Initial value of sequence*)
+(** Initial value of sequence*)
 let s1 = 102022661
 
 (** Compute next element of sequence given current element *)
@@ -44,9 +41,10 @@ let generate_matrix dim =
 (** Compute element i, j of M given sequence array *)
 let matrix_elem i j sequence = sequence.{2 * i} + sequence.{2 * j + 1}
 
+(** Binary minimum *)
 let binmin x y = if y < x then y else x
 
-(** First attempt at cheapest path algo *)
+(** First attempt at least cost path algo given matrix size n x n *)
 let cheapest_path n =
   let open Array in
   let sequence = generate_sequence (2 * n) in
@@ -69,9 +67,10 @@ let cheapest_path n =
   in arriterate 1 0
 
 
-    
-    
 
+
+
+(* Printing *)
 
 
 (** Convert Array to string for printing *)
@@ -82,7 +81,7 @@ let string_of_array a =
     else aux (acc ^ "; " ^ string_of_int a.(i)) (i + 1)
   in aux "" 0
 
-  (** Convert Bigarray.Array1 to string for printing *)
+(** Convert Bigarray.Array1 to string for printing *)
 let string_of_array1 a =
     let rec aux acc i =
     if i = 0 then aux ("[| " ^ (string_of_int a.{i})) (i + 1)
@@ -99,7 +98,6 @@ let print_array2 (arr : (int, Bigarray.int_elt, Bigarray.c_layout) Bigarray.Arra
   let open Format in
   let rows = Array2.dim1 arr in
   let cols = Array2.dim2 arr in
-  (* Determine the maximum width of any element for neat columns *)
   let max_width =
     let max_len = ref 0 in
     for i = 0 to rows - 1 do
@@ -109,14 +107,12 @@ let print_array2 (arr : (int, Bigarray.int_elt, Bigarray.c_layout) Bigarray.Arra
     done;
     !max_len
   in
-  (* Print the array *)
-  printf "@[<v>"; (* Start vertical alignment *)
+  printf "@[<v>";
   for i = 0 to rows - 1 do
-    printf "@[<h>[|"; (* Start horizontal alignment for a row *)
+    printf "@[<h>[|";
     for j = 0 to cols - 1 do
-      (* Print element with proper padding *)
       printf "%*d " max_width (Array2.get arr i j)
     done;
     printf "|]@]@,";
   done;
-  printf "@]@."; (* End vertical alignment *)
+  printf "@]@.";
