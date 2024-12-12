@@ -1,5 +1,3 @@
-(* Main *)
-
 module StdArray = Stdlib.Array
 
 open Euler917.Sequence
