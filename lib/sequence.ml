@@ -32,6 +32,10 @@ let generate_sequence n =
         else arr
     in aux 0
 
+(** Generate the ith row of the n x n matrix *)
+let generate_row i n sequence =
+  Array.init n (fun j -> sequence.{2 * i} + sequence.{2 * j + 1})
+
 (** Generate 2d array representation of matrix M where M_ij = s_2i-1 + s_2j *)
 let generate_matrix dim =
   let open Bigarray in
@@ -58,7 +62,7 @@ let cheapest_path n =
           iterate_on_row (j + 1)
         end
         else if j < n then begin
-          path_costs.(j) <- binmin path_costs.(j - 1) path_costs.(j) + matrix_elem i j sequence;
+          path_costs.(j) <- (binmin path_costs.(j - 1) path_costs.(j)) + matrix_elem i j sequence;
           iterate_on_row (j + 1)
         end
         else arriterate (i + 1) 0
@@ -66,8 +70,28 @@ let cheapest_path n =
     else path_costs.(n-1)
   in arriterate 1 0
 
-
-
+(** Second attempt at least cost path algo. Pre-computes each matrix row before computing path costs. *)
+let cheapest_path_precompute n =
+  let open Array in
+  let sequence = generate_sequence (2 * n) in
+  let path_costs = init n (fun j -> match j with | 0 -> matrix_elem 0 0 sequence | _ -> 0) in
+  mapi_inplace (fun j x -> if j = 0 then x else path_costs.(j - 1) + matrix_elem 0 j sequence) path_costs;
+  let rec arriterate i j =
+    if i < n then 
+      let current_row = generate_row i n sequence in
+      let rec iterate_on_row j =
+        if j = 0 then begin
+          path_costs.(0) <- path_costs.(0) + current_row.(0);
+          iterate_on_row (j + 1)
+        end
+        else if j < n then begin
+          path_costs.(j) <- (binmin path_costs.(j - 1) path_costs.(j)) + current_row.(j);
+          iterate_on_row (j + 1)
+        end
+        else arriterate (i + 1) 0
+        in iterate_on_row j
+    else path_costs.(n-1)
+  in arriterate 1 0
 
 
 (* Printing *)

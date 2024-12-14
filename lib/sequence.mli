@@ -7,6 +7,7 @@ val generate_matrix :
 val matrix_elem : int -> int -> (int, 'a, 'b) Bigarray.Array1.t -> int
 val binmin : 'a -> 'a -> 'a
 val cheapest_path : int -> int
+val cheapest_path_precompute : int -> int
 val string_of_array : int array -> string
 val string_of_array1 : (int, 'a, 'b) Bigarray.Array1.t -> string
 val print_array1 : (int, 'a, 'b) Bigarray.Array1.t -> unit
